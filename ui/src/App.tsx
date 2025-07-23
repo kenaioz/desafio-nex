@@ -1,20 +1,27 @@
 import { ThemeProvider } from "@/components/theme/theme-provider";
-import { ThemeSwitcher } from "@/components/theme/ThemeSwitcher";
 
-import { Button } from "./components/ui/button";
+import { Route, Routes } from "react-router";
+
+import AppLayout from "./pages/application/layout";
+import Transactions from "./pages/application/transactions";
+
+import AuthLayout from "./pages/auth/layout";
+import { SignIn } from "./pages/auth/signin";
+import { SignUp } from "./pages/auth/signup";
 
 function App() {
   return (
     <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
-      <div className="flex min-h-svh flex-col items-center justify-center">
-        <ThemeSwitcher />
-        <Button
-          className="cursor-pointer transition-all duration-300 ease-in-out"
-          onClick={() => console.log("Teste")}
-        >
-          Click me
-        </Button>
-      </div>
+      <Routes>
+        <Route element={<AuthLayout />}>
+          <Route path="login" element={<SignIn />} />
+          <Route path="register" element={<SignUp />} />
+        </Route>
+
+        <Route path="/" element={<AppLayout />}>
+          <Route index element={<Transactions />} />
+        </Route>
+      </Routes>
     </ThemeProvider>
   );
 }
