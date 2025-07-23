@@ -4,7 +4,7 @@ import config from './config/env';
 import { sequelize } from './database/sequelize';
 
 sequelize
-  .sync({ alter: true })
+  .sync({ alter: false })
   .then(() => {
     console.log('Database connected & models synced');
     app.listen(config.PORT, () => {

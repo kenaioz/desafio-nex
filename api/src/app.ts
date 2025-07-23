@@ -20,7 +20,9 @@ app.use(
   ) => {
     const statusCode = err instanceof HttpError ? err.statusCode : 500;
 
-    console.error(`[Error] ${req.method} ${req.url} - ${err.message}`);
+    console.error(
+      `[Error] ${req.method} ${req.url} - ${err.message} - ${err.stack}`,
+    );
 
     if (err instanceof HttpError) {
       return res.status(statusCode).json({

@@ -1,17 +1,21 @@
 import { Router } from 'express';
 
+import { AuthMiddleware } from '../middlewares/auth.middleware';
+
 import { TransactionRepository } from '../repositories/transactions.repository';
 import { TransactionService } from '../services/transactions.services';
 import { TransactionController } from '../controllers/transactions.controllers';
 
 const router = Router();
 
-const repository = new TransactionRepository();
-const service = new TransactionService(repository);
-const controller = new TransactionController(service);
+const transactionRepository = new TransactionRepository();
+const transactionService = new TransactionService(transactionRepository);
+const transactionController = new TransactionController(transactionService);
 
-router.get('/', controller.getAll);
-router.get('/:id', controller.getById);
-router.post('/', controller.create);
+router.use(AuthMiddleware);
+
+router.get('/', transactionController.getAll);
+router.get('/:id', transactionController.getById);
+router.post('/', transactionController.create);
 
 export default router;

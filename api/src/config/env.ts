@@ -9,6 +9,7 @@ interface Config {
   MYSQL_ROOT_PASSWORD?: string;
   MYSQL_DATABASE?: string;
   MYSQL_HOST: string;
+  JWT_SECRET?: string;
 }
 
 const config: Config = {
@@ -18,6 +19,7 @@ const config: Config = {
   MYSQL_ROOT_PASSWORD: process.env.MYSQL_ROOT_PASSWORD,
   MYSQL_DATABASE: process.env.MYSQL_DATABASE,
   MYSQL_HOST: process.env.MYSQL_HOST || 'localhost',
+  JWT_SECRET: process.env.JWT_SECRET,
 };
 
 export default config;
