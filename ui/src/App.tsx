@@ -2,10 +2,10 @@ import { ThemeProvider } from "@/components/theme/theme-provider";
 
 import { Route, Routes } from "react-router";
 
-import AppLayout from "./pages/application/layout";
-import Transactions from "./pages/application/transactions";
+import { AppLayout } from "./pages/application/layout";
+import { Transactions } from "./pages/application/transactions";
 
-import AuthLayout from "./pages/auth/layout";
+import { AuthLayout } from "./pages/auth/layout";
 import { SignIn } from "./pages/auth/signin";
 import { SignUp } from "./pages/auth/signup";
 

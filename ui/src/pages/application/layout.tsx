@@ -1,7 +1,7 @@
 import { ThemeSwitcher } from "@/components/theme/ThemeSwitcher";
 import { Outlet } from "react-router";
 
-export default function AppLayout() {
+export function AppLayout() {
   return (
     <div className="grid min-h-screen grid-rows-[auto_1fr_auto]">
       <header className="flex h-16 items-center justify-between px-8 py-4">

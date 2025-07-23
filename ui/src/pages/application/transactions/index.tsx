@@ -69,7 +69,7 @@ const invoices = [
   },
 ];
 
-export default function Transactions() {
+export function Transactions() {
   return (
     <div className="flex h-full flex-col gap-8">
       <HighlightCards />
