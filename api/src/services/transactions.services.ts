@@ -1,5 +1,9 @@
 import { TransactionRepository } from '../repositories/transactions.repository';
-import { Transaction } from '../models/Transactions';
+
+import {
+  Transaction,
+  TransactionCreationAttributes,
+} from '../models/Transactions';
 
 import { HttpError } from '../utils/HttpError';
 
@@ -20,7 +24,7 @@ export class TransactionService {
     return transaction;
   }
 
-  async create(data: Transaction): Promise<Transaction> {
+  async create(data: TransactionCreationAttributes): Promise<Transaction> {
     if (!data.cpf || !data.status) {
       throw new HttpError(400, 'Campos obrigatórios ausentes');
     }

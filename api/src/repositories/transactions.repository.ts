@@ -1,4 +1,7 @@
-import { Transaction } from '../models/Transactions';
+import {
+  Transaction,
+  TransactionCreationAttributes,
+} from '../models/Transactions';
 
 export class TransactionRepository {
   async findAll(): Promise<Transaction[]> {
@@ -9,7 +12,7 @@ export class TransactionRepository {
     return await Transaction.findByPk(id);
   }
 
-  async create(data: Transaction): Promise<Transaction> {
+  async create(data: TransactionCreationAttributes): Promise<Transaction> {
     return await Transaction.create(data);
   }
 }

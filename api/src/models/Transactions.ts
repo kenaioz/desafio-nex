@@ -15,18 +15,16 @@ export type TransactionStatus = 'Aprovado' | 'Reprovado' | 'Em avaliação';
 export interface TransactionAttributes {
   id: number;
   cpf: string;
-  descricao: string;
-  dataTransacao: Date;
-  valorPontos: number;
-  valor: number;
+  description: string;
+  date: Date;
+  points: number;
+  value: number;
   status: TransactionStatus;
   createdAt?: Date;
 }
 
-export type TransactionCreationAttributes = Optional<
-  TransactionAttributes,
-  'id' | 'createdAt'
->;
+export interface TransactionCreationAttributes
+  extends Optional<TransactionAttributes, 'id' | 'createdAt'> {}
 
 @Table({ tableName: 'transactions' })
 export class Transaction extends Model<
@@ -42,24 +40,24 @@ export class Transaction extends Model<
   cpf!: string;
 
   @Column({ type: DataType.STRING, allowNull: false })
-  descricao!: string;
+  description!: string;
 
   @Column({
     type: DataType.DATEONLY,
     allowNull: false,
-    field: 'data_transacao',
+    field: 'date',
   })
-  dataTransacao!: Date;
+  date!: Date;
 
-  @Column({ type: DataType.INTEGER, allowNull: false, field: 'valor_pontos' })
-  valorPontos!: number;
+  @Column({ type: DataType.INTEGER, allowNull: false, field: 'points' })
+  points!: number;
 
   @Column({
     type: DataType.DECIMAL(12, 2),
     allowNull: false,
-    field: 'valor_monetario',
+    field: 'value',
   })
-  valor!: number;
+  value!: number;
 
   @Column({
     type: DataType.ENUM('Aprovado', 'Reprovado', 'Em avaliação'),
@@ -68,6 +66,6 @@ export class Transaction extends Model<
   status!: TransactionStatus;
 
   @CreatedAt
-  @Column({ type: DataType.DATE, field: 'created_at' })
+  @Column({ type: DataType.DATE })
   createdAt!: Date;
 }
