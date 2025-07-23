@@ -10,6 +10,14 @@ export class UsersController {
     return res.status(200).json(users);
   };
 
+  getByEmail = async (req: Request, res: Response) => {
+    const { email } = req.params;
+
+    const user = await this.userService.getByEmail(email);
+
+    return res.status(200).json(user);
+  };
+
   register = async (req: Request, res: Response) => {
     const { email, password, cpf, fullName, admin } = req.body;
     try {
