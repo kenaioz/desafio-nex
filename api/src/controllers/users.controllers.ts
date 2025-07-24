@@ -2,6 +2,9 @@ import { Request, Response } from 'express';
 
 import { UserService } from '../services/users.services';
 
+import { tryCatch } from '../utils/try-catch';
+import { HttpError } from '../utils/HttpError';
+
 export class UsersController {
   constructor(private userService: UserService) {}
   getAll = async (req: Request, res: Response) => {
@@ -20,17 +23,21 @@ export class UsersController {
 
   register = async (req: Request, res: Response) => {
     const { email, password, cpf, fullName, admin } = req.body;
-    try {
-      const user = await this.userService.register({
+
+    const [error, user] = await tryCatch(
+      this.userService.register({
         email,
         password,
         cpf,
         fullName,
         admin: admin || false,
-      });
-      return res.status(201).json(user);
-    } catch (err: any) {
-      return res.status(400).json({ message: err.message });
+      }),
+    );
+
+    if (error) {
+      throw new HttpError(400, error.message);
     }
+
+    return res.status(201).json(user);
   };
 }

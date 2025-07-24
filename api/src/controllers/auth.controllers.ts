@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 
 import { AuthService } from '../services/auth.services';
+import { HttpError } from '../utils/HttpError';
 
 export class AuthController {
   constructor(private authService: AuthService) {}
@@ -10,7 +11,7 @@ export class AuthController {
     const token = await this.authService.login(email, password);
 
     if (!token) {
-      return res.status(401).json({ message: 'Usuário ou senha inválidos' });
+      throw new HttpError(401, 'Usuário ou senha inválidos');
     }
 
     return res.json({ token });
