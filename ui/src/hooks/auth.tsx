@@ -44,7 +44,7 @@ function AuthProvider({ children }: AuthProviderProps) {
     const api = new API();
 
     const [error, response] = await tryCatch(
-      api.post<AuthData>("/login", {
+      api.post<AuthData>("/auth/login", {
         body: JSON.stringify({ email, password }),
       }),
     );
@@ -61,6 +61,8 @@ function AuthProvider({ children }: AuthProviderProps) {
     api.createSession(response.token);
 
     setData({ token, user });
+
+    console.log("Fim SignIn");
 
     return;
   }
@@ -80,7 +82,7 @@ function AuthProvider({ children }: AuthProviderProps) {
     api.createSession(token);
 
     (async () => {
-      const [error, response] = await tryCatch(api.post<User>("/verify"));
+      const [error, response] = await tryCatch(api.post<User>("/auth/verify"));
 
       if (error) {
         console.error("Erro ao verificar token", error);

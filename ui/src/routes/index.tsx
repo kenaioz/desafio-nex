@@ -20,7 +20,9 @@ export function Routes() {
     const verifyToken = async () => {
       const api = new API();
 
-      const [error] = await tryCatch(api.post("/verify"));
+      api.createSession(token);
+
+      const [error] = await tryCatch(api.post("/auth/verify"));
 
       if (error) {
         signOut();

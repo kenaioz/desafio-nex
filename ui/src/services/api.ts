@@ -17,7 +17,7 @@ export class API {
   private jwt: string | null = null;
 
   constructor() {
-    this.url_base = import.meta.env.BASE_URL;
+    this.url_base = import.meta.env.VITE_API_BASE_URL;
   }
 
   createSession(token: string) {
