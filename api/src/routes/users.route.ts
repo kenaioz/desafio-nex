@@ -11,8 +11,6 @@ const userRepository = new UserRepository();
 const userService = new UserService(userRepository);
 const userController = new UsersController(userService);
 
-router.use(AuthMiddleware);
-
 router.get('/', AuthMiddleware, userController.getAll);
 router.post('/register', userController.register);
 router.get('/:email', AuthMiddleware, userController.getByEmail);
