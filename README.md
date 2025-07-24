@@ -12,6 +12,7 @@ Desafio para a vaga [https://github.com/Nex-Digital/Desafio-Full-Stack-2]
 - ✅ Principais rotas da API
 - ✅ Estrutura base do frontend em React/Vite e Shadcn
 - ✅ Autenticação com JWT
+- ✅ Criação de usuário
 
 ## O que está faltando
 
