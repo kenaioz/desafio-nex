@@ -9,7 +9,9 @@ import {
   PrimaryKey,
   AutoIncrement,
   Default,
+  HasMany,
 } from 'sequelize-typescript';
+import { Transaction } from './Transactions';
 
 export interface UserAttributes {
   id: number;
@@ -31,7 +33,7 @@ export class User extends Model<User, UserCreationAttributes> {
   @PrimaryKey
   @AutoIncrement
   @Column(DataType.INTEGER)
-  id!: number;
+  declare id: number;
 
   @AllowNull(false)
   @Column(DataType.STRING)
@@ -53,4 +55,7 @@ export class User extends Model<User, UserCreationAttributes> {
   @Default(false)
   @Column(DataType.BOOLEAN)
   admin!: boolean;
+
+  @HasMany(() => Transaction, { foreignKey: 'cpf', sourceKey: 'cpf' })
+  transactions!: Transaction[];
 }

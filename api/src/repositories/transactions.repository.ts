@@ -8,6 +8,10 @@ export class TransactionRepository {
     return await Transaction.findAll();
   }
 
+  async findByCPF(cpf: string): Promise<Transaction | null> {
+    return await Transaction.findOne({ where: { cpf } });
+  }
+
   async findById(id: number): Promise<Transaction | null> {
     return await Transaction.findByPk(id);
   }

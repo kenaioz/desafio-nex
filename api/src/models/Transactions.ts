@@ -6,9 +6,11 @@ import {
   AutoIncrement,
   DataType,
   CreatedAt,
+  BelongsTo,
 } from 'sequelize-typescript';
 
 import { Optional } from 'sequelize';
+import { User } from './Users';
 
 export type TransactionStatus = 'Aprovado' | 'Reprovado' | 'Em avaliação';
 
@@ -34,7 +36,7 @@ export class Transaction extends Model<
   @PrimaryKey
   @AutoIncrement
   @Column({ type: DataType.INTEGER })
-  id!: number;
+  declare id: number;
 
   @Column({ type: DataType.STRING(14), allowNull: false })
   cpf!: string;
@@ -67,5 +69,9 @@ export class Transaction extends Model<
 
   @CreatedAt
   @Column({ type: DataType.DATE })
-  createdAt!: Date;
+  declare createdAt: Date;
+
+  // Relacionamento: Uma transação pertence a um usuário
+  @BelongsTo(() => User, { foreignKey: 'cpf', targetKey: 'cpf' })
+  user!: User;
 }

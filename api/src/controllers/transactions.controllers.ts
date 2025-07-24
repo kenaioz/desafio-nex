@@ -2,11 +2,15 @@ import { Request, Response, NextFunction } from 'express';
 
 import { TransactionService } from '../services/transactions.services';
 
+import { User } from '../models/Users';
+
 export class TransactionController {
   constructor(private transactionService: TransactionService) {}
 
-  getAll = async (_req: Request, res: Response, _next: NextFunction) => {
-    const transactions = await this.transactionService.getAll();
+  getAll = async (req: Request, res: Response, _next: NextFunction) => {
+    const user = (req as any).user as User;
+
+    const transactions = await this.transactionService.getAll(user);
 
     return res.json(transactions);
   };

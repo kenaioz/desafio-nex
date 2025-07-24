@@ -7,14 +7,20 @@ import {
 
 import { HttpError } from '../utils/HttpError';
 
+import { User } from '../models/Users';
+
 export class TransactionService {
   constructor(private transactionRepository: TransactionRepository) {}
 
-  async getAll(): Promise<Transaction[]> {
-    return await this.transactionRepository.findAll();
+  async getAll(user: User) {
+    if (user.admin) {
+      return await this.transactionRepository.findAll();
+    }
+
+    return await this.transactionRepository.findByCPF(user.cpf);
   }
 
-  async getById(id: number): Promise<Transaction> {
+  async getById(id: number) {
     const transaction = await this.transactionRepository.findById(id);
 
     if (!transaction) {
@@ -24,7 +30,7 @@ export class TransactionService {
     return transaction;
   }
 
-  async create(data: TransactionCreationAttributes): Promise<Transaction> {
+  async create(data: TransactionCreationAttributes) {
     if (!data.cpf || !data.status) {
       throw new HttpError(400, 'Campos obrigatórios ausentes');
     }
