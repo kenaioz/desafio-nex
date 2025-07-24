@@ -62,8 +62,6 @@ function AuthProvider({ children }: AuthProviderProps) {
 
     setData({ token, user });
 
-    console.log("Fim SignIn");
-
     return;
   }
 

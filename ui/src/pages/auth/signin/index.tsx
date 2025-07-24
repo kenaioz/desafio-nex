@@ -1,3 +1,5 @@
+import { NavLink } from "react-router";
+
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -21,6 +23,7 @@ import { Input } from "@/components/ui/input";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+
 import { useAuth } from "@/hooks/auth";
 
 const CreateLoginSchema = z.object({
@@ -42,20 +45,20 @@ export function SignIn() {
   });
 
   async function handleLoginSubmit(formsData: LoginSchema) {
-    console.log("formsData", formsData);
-
     await signIn(formsData);
   }
 
   return (
     <Card className="w-full max-w-sm">
       <CardHeader>
-        <CardTitle>Login to your account</CardTitle>
+        <CardTitle>Login </CardTitle>
         <CardDescription>
-          Enter your email below to login to your account
+          Insira seu usuário e a sua senha para acessar a plataforma.
         </CardDescription>
         <CardAction>
-          <Button variant="link">Sign In</Button>
+          <Button variant="link" asChild>
+            <NavLink to="/register">Sign Up</NavLink>
+          </Button>
         </CardAction>
       </CardHeader>
       <CardContent>
